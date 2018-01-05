@@ -36,6 +36,7 @@ class welcomeFXController extends Initializable{
   @FXML private var placeBattle : Button = _
   @FXML private var placeCruiser: Button = _
   @FXML private var placeSubmarine : Button = _
+  @FXML private var dirBtn : Button = _
 
   //Save our setupinfoin these vars
   var battleField_Size : Int = _
@@ -44,6 +45,7 @@ class welcomeFXController extends Initializable{
   var submarines_Amount : Int = _
 
   //Testing
+  var length : Int = 0
   var setupStatus : Int = 0
   var shipDirection : Int = 0
 
@@ -104,6 +106,26 @@ class welcomeFXController extends Initializable{
     }
 
   }
+  @FXML private def changeDir(event: ActionEvent): Unit ={
+    shipDirection match {
+      case 0 => {
+        dirBtn.setText("right")
+        shipDirection +=1
+      }
+      case 1 => {
+        dirBtn.setText("left")
+        shipDirection += 1
+      }
+      case 2 => {
+        dirBtn.setText("up")
+        shipDirection += 1
+      }
+      case 3 => {
+        dirBtn.setText("down")
+        shipDirection = 0
+      }
+    }
+  }
 
   @FXML private def getcord(event: MouseEvent): Unit ={
    /*var node : Node = event.getPickResult.getIntersectedNode
@@ -114,19 +136,70 @@ class welcomeFXController extends Initializable{
     print(x+1,y+1,id)
     */
     if(setupStatus == 1) {
+      player.setText("Place your Ship")
       var node : Node = event.getPickResult.getIntersectedNode
       var x = GridPane.getColumnIndex(node)
       var y = GridPane.getRowIndex(node)
-      print(getNode(x,y,battleGrid))
-
+      var selectedNode : Node = getNode(x,y,battleGrid)
+      //WE got now our Starting node now its time to calculate the direction a and fetch the POS
+      shipDirection match{
+        case 0 => {
+          var i = x + length -1
+          if(i>6) println("This wont fit")
+          else{
+            selectedNode.setStyle("-fx-background-color: #36403B")
+            while(i > x) {
+              var tinynode = getNode(if(i == 0) null else i, y, battleGrid)
+              tinynode.setStyle("-fx-background-color: #36403B")
+              i = i - 1
+            }
+          }
+        }
+        case 1 => {
+          var i = x - length +1
+          if(i<0)println("This wont fit")
+          else {
+            selectedNode.setStyle("-fx-background-color: #36403B")
+            while(i < x) {
+              var tinynode = getNode(if(i == 0) null else i, y, battleGrid)
+              tinynode.setStyle("-fx-background-color: #36403B")
+              i = i + 1
+            }
+          }
+        }
+        case 2 => {
+          var i = y + length -1
+          if(i > 6) println("This wont fit")
+          else{
+            selectedNode.setStyle("-fx-background-color: #36403B")
+            while(i > y) {
+              var tinynode = getNode(x, i, battleGrid)
+              tinynode.setStyle("-fx-background-color: #36403B")
+              i = i - 1
+            }
+          }
+        }
+        case 3 => {
+          var i = y - length +1
+          if(i < 0) println("This wont fit")
+          else{
+            selectedNode.setStyle("-fx-background-color: #36403B")
+            while(i < y) {
+              var tinynode = getNode(x, i, battleGrid)
+              tinynode.setStyle("-fx-background-color: #36403B")
+              i = i + 1
+            }
+          }
+        }
+      }
     }
     else println("Select a Ship first")
 
   }
 
+  //EXECUTED A PLACEMENT BUTTON GETS CLICKED
   @FXML private def placeShip(event: ActionEvent): Unit = {
     var node = event.getSource().toString
-    var length : Int = 0
     if(node == "Button[id=placeBattle, styleClass=button]'Place a Battleship'") length = 5
     if(node == "Button[id=placeCruiser, styleClass=button]'Place a Cruiser'") length = 3
     if(node == "Button[id=placeSubmarine, styleClass=button]'Place a Submarine'") length = 2
@@ -137,13 +210,12 @@ class welcomeFXController extends Initializable{
   //just a small helper for small people
   def isAllDigits(x: String) = x forall Character.isDigit
 
-  def getNode(column: Int,row : Int, grid : GridPane) : Node = {
+  def getNode(column: Any,row : Any, grid : GridPane) : Node = {
     var children = grid.getChildren
-    for(node <- children){
-      if(GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == column) node
-    }
+    var result : Node = null
+    children.forEach(node=>if(GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == column) result = node)
+    result
   }
-
 }
 
 
