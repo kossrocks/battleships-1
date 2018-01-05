@@ -121,7 +121,7 @@
                 </GridPane>
             <Button fx:id="placeBattle" layoutX="478.0" layoutY="87.0" mnemonicParsing="false" onAction="#placeShip" text="Place a Battleship" />
             <Button fx:id="placeCruiser" layoutX="478.0" layoutY="128.0" mnemonicParsing="false" onAction="#placeShip" text="Place a Cruiser" />
-            <Button fx:id="dirBtn" layoutX="478.0" layoutY="218.0" mnemonicParsing="false" onAction="#changeDir" prefHeight="57.0" prefWidth="114.0" text="right" />
+            <Button fx:id="dirBtn" layoutX="478.0" layoutY="218.0" mnemonicParsing="false" onAction="#changeDir" prefHeight="57.0" prefWidth="114.0" text="Set Direction" />
             <Button fx:id="placeSubmarine" layoutX="478.0" layoutY="168.0" mnemonicParsing="false" onAction="#placeShip" text="Place a Submarine" />
             </children>
         </AnchorPane>

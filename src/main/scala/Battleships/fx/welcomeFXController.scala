@@ -47,7 +47,7 @@ class welcomeFXController extends Initializable{
   //Testing
   var length : Int = 0
   var setupStatus : Int = 0
-  var shipDirection : Int = 0
+  var shipDirection : Int = -1
 
   override def initialize(url: URL, rb: ResourceBundle): Unit = initGame()
   def initGame():Unit ={
@@ -108,12 +108,16 @@ class welcomeFXController extends Initializable{
   }
   @FXML private def changeDir(event: ActionEvent): Unit ={
     shipDirection match {
-      case 0 => {
+      case -1 => {
         dirBtn.setText("right")
         shipDirection +=1
       }
-      case 1 => {
+      case 0 => {
         dirBtn.setText("left")
+        shipDirection +=1
+      }
+      case 1 => {
+        dirBtn.setText("down")
         shipDirection += 1
       }
       case 2 => {
@@ -121,7 +125,7 @@ class welcomeFXController extends Initializable{
         shipDirection += 1
       }
       case 3 => {
-        dirBtn.setText("down")
+        dirBtn.setText("right")
         shipDirection = 0
       }
     }
