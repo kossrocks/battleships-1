@@ -1,0 +1,1 @@
+scalac -bootclasspath C:\Users\------\.sbt\boot\scala-2.12.4\lib\scala-library.jar -classpath C:\workspace\Battleships\target\scala-2.12\classes C:\workspace\Battleships\src\main\scala\Battleship.fxml\BattleShipFXController.scala

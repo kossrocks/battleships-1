@@ -1,0 +1,13 @@
+[0m[[0m[0minfo[0m] [0m[0mPackaging C:\workspace\Battleships\target\scala-2.12\battleships_2.12-0.1.jar ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Battleships[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\workspace\Battleships\target\scala-2.12\classes\Battleships[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Battleship.fxml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\workspace\Battleships\target\scala-2.12\classes\Battleship.fxml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Battleships\classes.sc[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\workspace\Battleships\target\scala-2.12\classes\Battleships\classes.sc[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Battleship.fxml\battleships.fxml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\workspace\Battleships\target\scala-2.12\classes\Battleship.fxml\battleships.fxml[0m
+[0m[[0m[0mdebug[0m] [0m[0m	BattleShipFXController.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  C:\workspace\Battleships\target\scala-2.12\classes\BattleShipFXController.class[0m
+[0m[[0m[0minfo[0m] [0m[0mDone packaging.[0m

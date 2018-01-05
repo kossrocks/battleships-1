@@ -1,0 +1,14 @@
+ .pane-blue {
+     -fx-background-color: #62BCFA;
+     -fx-background-radius: 5,5,4;
+ }
+
+ .pane-red{
+     -fx-background-color: #C43235;
+     -fx-background-radius: 5,5,4;
+ }
+
+ .pane-black{
+      -fx-background-color: #36403B;
+      -fx-background-radius: 5,5,4;
+ }
