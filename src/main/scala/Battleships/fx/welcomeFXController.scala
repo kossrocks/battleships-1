@@ -8,8 +8,10 @@ import java.util.ResourceBundle
 import javafx.fxml.{FXML, Initializable}
 import javafx.scene.control.{Button, Label, TextArea, TextField}
 import javafx.scene.input.MouseEvent
+
 import Battleships.model
-import Battleships.model.Position
+import Battleships.model.{Fleet, Position}
+
 import scala.util.{Failure, Success}
 
 class welcomeFXController extends Initializable{
@@ -53,11 +55,13 @@ class welcomeFXController extends Initializable{
   var player1_battleships : Int = 0
   var player1_cruisers : Int = 0
   var player1_submarines : Int = 0
+  var player1_fleet : Fleet = new Fleet(List(List(Position(0,0))))
 
   //PLAYER2 VARS
   var player2_battleships : Int = 0
   var player2_cruisers : Int = 0
   var player2_submarines : Int = 0
+  var player2_fleet : Fleet = new Fleet(List(List(Position(0,0))))
 
 
   override def initialize(url: URL, rb: ResourceBundle): Unit = initGame()
@@ -146,6 +150,7 @@ class welcomeFXController extends Initializable{
         var y = GridPane.getRowIndex(node)
         var selectedNode : Node = getNode(x,y,battleGrid)
         //WE got now our Starting node now its time to calculate the direction a and fetch the POS
+        var Ship =List(Position(x+1,y+1))
         shipDirection match{
           case 0 => {
             var i = x + length -1
@@ -155,8 +160,11 @@ class welcomeFXController extends Initializable{
               while(i > x) {
                 var tinynode = getNode(if(i == 0) null else i, y, battleGrid)
                 tinynode.setStyle("-fx-background-color: #36403B")
+                Ship = Ship ::: List(Position(i+1,y+1))
                 i = i - 1
               }
+              if(setupStatus == 1) player1_fleet.addShip(List(Ship)) //duplicate Code otherwhise ship will not be added watch how code gets executed!
+              if(setupStatus == 3) player2_fleet.addShip(List(Ship))
               shipReduction() //afterwards is ESSENTIAL DO NOT TOUCH PLS
             }
           }
@@ -168,8 +176,11 @@ class welcomeFXController extends Initializable{
               while(i < x) {
                 var tinynode = getNode(if(i == 0) null else i, y, battleGrid)
                 tinynode.setStyle("-fx-background-color: #36403B")
+                Ship = Ship ::: List(Position(i+1,y+1))
                 i = i + 1
               }
+              if(setupStatus == 1) player1_fleet.addShip(List(Ship))
+              if(setupStatus == 3) player2_fleet.addShip(List(Ship))
               shipReduction()
             }
           }
@@ -181,8 +192,11 @@ class welcomeFXController extends Initializable{
               while(i > y) {
                 var tinynode = getNode(x, if(i == 0) null else i, battleGrid)
                 tinynode.setStyle("-fx-background-color: #36403B")
+                Ship = Ship ::: List(Position(x+1,i+1))
                 i = i - 1
               }
+              if(setupStatus == 1) player1_fleet.addShip(List(Ship))
+              if(setupStatus == 3) player2_fleet.addShip(List(Ship))
               shipReduction()
             }
           }
@@ -194,8 +208,11 @@ class welcomeFXController extends Initializable{
               while(i < y) {
                 var tinynode = getNode(x, if(i == 0) null else i, battleGrid)
                 tinynode.setStyle("-fx-background-color: #36403B")
+                Ship = Ship ::: List(Position(x+1,i+1))
                 i = i + 1
               }
+              if(setupStatus == 1) player1_fleet.addShip(List(Ship))
+              if(setupStatus == 3) player2_fleet.addShip(List(Ship))
               shipReduction()
             }
           }
@@ -262,6 +279,7 @@ class welcomeFXController extends Initializable{
           placeSubmarine.setText("Submarines: " + player2_submarines.toString)
         }
       }
+      if(player2_submarines+player2_cruisers+player2_battleships == 0) print(player2_fleet.shipsPos)
     }
   }
 
