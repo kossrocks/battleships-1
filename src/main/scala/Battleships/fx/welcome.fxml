@@ -43,6 +43,10 @@
         </AnchorPane>
         <AnchorPane fx:id="game" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
+            <Button fx:id="placeBattle" layoutX="478.0" layoutY="87.0" mnemonicParsing="false" onAction="#placeShip" text="Place a Battleship" />
+            <Button fx:id="placeCruiser" layoutX="478.0" layoutY="128.0" mnemonicParsing="false" onAction="#placeShip" text="Place a Cruiser" />
+            <Button fx:id="dirBtn" layoutX="478.0" layoutY="218.0" mnemonicParsing="false" onAction="#changeDir" prefHeight="57.0" prefWidth="114.0" text="Set Direction" />
+            <Button fx:id="placeSubmarine" layoutX="478.0" layoutY="168.0" mnemonicParsing="false" onAction="#placeShip" text="Place a Submarine" />
                 <Label fx:id="player" alignment="CENTER" layoutX="-65.0" layoutY="6.0" prefHeight="45.0" prefWidth="581.0" text="PLAYER 1">
                     <font>
                         <Font size="25.0" />
@@ -119,10 +123,6 @@
                         <Pane prefHeight="200.0" prefWidth="200.0" styleClass="pane-blue" GridPane.columnIndex="6" GridPane.rowIndex="6" />
                     </children>
                 </GridPane>
-            <Button fx:id="placeBattle" layoutX="478.0" layoutY="87.0" mnemonicParsing="false" onAction="#placeShip" text="Place a Battleship" />
-            <Button fx:id="placeCruiser" layoutX="478.0" layoutY="128.0" mnemonicParsing="false" onAction="#placeShip" text="Place a Cruiser" />
-            <Button fx:id="dirBtn" layoutX="478.0" layoutY="218.0" mnemonicParsing="false" onAction="#changeDir" prefHeight="57.0" prefWidth="114.0" text="Set Direction" />
-            <Button fx:id="placeSubmarine" layoutX="478.0" layoutY="168.0" mnemonicParsing="false" onAction="#placeShip" text="Place a Submarine" />
             </children>
         </AnchorPane>
     </children>

@@ -8,10 +8,8 @@ import java.util.ResourceBundle
 import javafx.fxml.{FXML, Initializable}
 import javafx.scene.control.{Button, Label, TextArea, TextField}
 import javafx.scene.input.MouseEvent
-
 import Battleships.model
 import Battleships.model.Position
-
 import scala.util.{Failure, Success}
 
 class welcomeFXController extends Initializable{
@@ -50,15 +48,16 @@ class welcomeFXController extends Initializable{
   var setupStatus : Int = 0
   var shipDirection : Int = -1
 
+
   //PLAYER1 VARS
   var player1_battleships : Int = 0
   var player1_cruisers : Int = 0
   var player1_submarines : Int = 0
 
   //PLAYER2 VARS
-  var player2_battleships : Int = battleShips_Amount
-  var player2_cruisers : Int = cruisers_Amount
-  var player2_submarines : Int = submarines_Amount
+  var player2_battleships : Int = 0
+  var player2_cruisers : Int = 0
+  var player2_submarines : Int = 0
 
 
   override def initialize(url: URL, rb: ResourceBundle): Unit = initGame()
@@ -92,12 +91,18 @@ class welcomeFXController extends Initializable{
       setupgame.getChildren.clear()
       game.setVisible(true)
       game.setManaged(true)
+      setupStatus = 1
+      length = 5 //select the Battleship
 
       //SET PLAYER1 VARS
       player1_battleships= battleShips_Amount
       player1_cruisers= cruisers_Amount
       player1_submarines= submarines_Amount
 
+      //Set Player2VARS
+      player2_battleships= battleShips_Amount
+      player2_cruisers= cruisers_Amount
+      player2_submarines= submarines_Amount
 
       //SET TEXT OF OUR BUTTONS
       placeBattle.setText("Battleships: " + battleShips_Amount.toString)
@@ -132,80 +137,74 @@ class welcomeFXController extends Initializable{
   }
 
   @FXML private def getcord(event: MouseEvent): Unit ={
-   /*var node : Node = event.getPickResult.getIntersectedNode
-    var x = GridPane.getColumnIndex(node)
-    var y = GridPane.getRowIndex(node)
-    var id = node.getId
-    node.setStyle("-fx-background-color: #36403B")
-    print(x+1,y+1,id)
-    */
     if(setupStatus == 1 || setupStatus == 3) {
       if(!shipPlaceCheck()) println("Please choose another ship") //returns false if the chosen ship amount is 0
       else{
-      player.setText("Place your Ship")
-      var node : Node = event.getPickResult.getIntersectedNode
-      var x = GridPane.getColumnIndex(node)
-      var y = GridPane.getRowIndex(node)
-      var selectedNode : Node = getNode(x,y,battleGrid)
-      //WE got now our Starting node now its time to calculate the direction a and fetch the POS
-      shipDirection match{
-        case 0 => {
-          var i = x + length -1
-          if(i>6) println("This wont fit")
-          else{
-            selectedNode.setStyle("-fx-background-color: #36403B")
-            shipReduction()
-            while(i > x) {
-              var tinynode = getNode(if(i == 0) null else i, y, battleGrid)
-              tinynode.setStyle("-fx-background-color: #36403B")
-              i = i - 1
+        player.setText("Place your Ship")
+        var node : Node = event.getPickResult.getIntersectedNode
+        var x = GridPane.getColumnIndex(node)
+        var y = GridPane.getRowIndex(node)
+        var selectedNode : Node = getNode(x,y,battleGrid)
+        //WE got now our Starting node now its time to calculate the direction a and fetch the POS
+        shipDirection match{
+          case 0 => {
+            var i = x + length -1
+            if(i>6) println("This wont fit")
+            else{
+              selectedNode.setStyle("-fx-background-color: #36403B")
+              while(i > x) {
+                var tinynode = getNode(if(i == 0) null else i, y, battleGrid)
+                tinynode.setStyle("-fx-background-color: #36403B")
+                i = i - 1
+              }
+              shipReduction() //afterwards is ESSENTIAL DO NOT TOUCH PLS
             }
           }
-        }
-        case 1 => {
-          var i = x - length +1
-          if(i<0)println("This wont fit")
-          else {
-            selectedNode.setStyle("-fx-background-color: #36403B")
-            shipReduction()
-            while(i < x) {
-              var tinynode = getNode(if(i == 0) null else i, y, battleGrid)
-              tinynode.setStyle("-fx-background-color: #36403B")
-              i = i + 1
+          case 1 => {
+            var i = x - length +1
+            if(i<0)println("This wont fit")
+            else {
+              selectedNode.setStyle("-fx-background-color: #36403B")
+              while(i < x) {
+                var tinynode = getNode(if(i == 0) null else i, y, battleGrid)
+                tinynode.setStyle("-fx-background-color: #36403B")
+                i = i + 1
+              }
+              shipReduction()
             }
           }
-        }
-        case 2 => {
-          var i = y + length -1
-          if(i > 6) println("This wont fit")
-          else{
-            selectedNode.setStyle("-fx-background-color: #36403B")
-            shipReduction()
-            while(i > y) {
-              var tinynode = getNode(x, if(i == 0) null else i, battleGrid)
-              tinynode.setStyle("-fx-background-color: #36403B")
-              i = i - 1
+          case 2 => {
+            var i = y + length -1
+            if(i > 6) println("This wont fit")
+            else{
+              selectedNode.setStyle("-fx-background-color: #36403B")
+              while(i > y) {
+                var tinynode = getNode(x, if(i == 0) null else i, battleGrid)
+                tinynode.setStyle("-fx-background-color: #36403B")
+                i = i - 1
+              }
+              shipReduction()
             }
           }
-        }
-        case 3 => {
-          var i = y - length +1
-          if(i < 0) println("This wont fit")
-          else{
-            selectedNode.setStyle("-fx-background-color: #36403B")
-            shipReduction()
-            while(i < y) {
-              var tinynode = getNode(x, if(i == 0) null else i, battleGrid)
-              tinynode.setStyle("-fx-background-color: #36403B")
-              i = i + 1
+          case 3 => {
+            var i = y - length +1
+            if(i < 0) println("This wont fit")
+            else{
+              selectedNode.setStyle("-fx-background-color: #36403B")
+              while(i < y) {
+                var tinynode = getNode(x, if(i == 0) null else i, battleGrid)
+                tinynode.setStyle("-fx-background-color: #36403B")
+                i = i + 1
+              }
+              shipReduction()
             }
           }
         }
       }
     }
-    }
     else println("Select a Ship first")
   }
+
   def shipPlaceCheck(): Boolean = {
     if (setupStatus == 1) {
       length match {
@@ -216,9 +215,9 @@ class welcomeFXController extends Initializable{
     }
     else {
       length match {
-        case 5 => if (player1_battleships > 0) true else false
-        case 3 => if (player1_cruisers > 0) true else false
-        case 2 => if (player1_submarines > 0) true else false
+        case 5 => if (player2_battleships > 0) true else false
+        case 3 => if (player2_cruisers > 0) true else false
+        case 2 => if (player2_submarines > 0) true else false
       }
     }
   }
@@ -246,7 +245,7 @@ class welcomeFXController extends Initializable{
           }
         }
       }
-    if(player1_submarines+player1_cruisers+player1_battleships ==0) println("Let Player 2 Place his stuff")
+    if(player1_submarines+player1_cruisers+player1_battleships ==0) changePlayerSetup()
     }
     else{ //setupstatus is not one and this function gets called means player 2 is setting up
       length match {
@@ -273,7 +272,16 @@ class welcomeFXController extends Initializable{
     if(node == "Button[id=placeCruiser") length = 3
     if(node == "Button[id=placeSubmari") length = 2
     player.setText("Select Starting Point")
-    setupStatus = 1 //Ship is selected and length is set.
+  }
+
+  def changePlayerSetup() : Unit = {
+    setupStatus = 3
+    player.setText("Player 2 Place your shit")
+    placeBattle.setText("Battleships: " + player2_battleships.toString)
+    placeCruiser.setText("Cruisers: " + player2_cruisers.toString)
+    placeSubmarine.setText("Submarines: " + player2_submarines.toString)
+    //Color THAT SHIT
+    battleGrid.getChildren.forEach(node => node.setStyle("-fx-background-color: #62BCFA"))
   }
 
   //just a small helper for small people
