@@ -24,3 +24,4 @@ case class Ship (length : Int , startPos : Position , direction : String) {
     }
   }
 }
+//WIRD NICHT BENÜTZT!

@@ -8,10 +8,8 @@ import java.util.ResourceBundle
 import javafx.fxml.{FXML, Initializable}
 import javafx.scene.control.{Button, Label, TextArea, TextField}
 import javafx.scene.input.MouseEvent
-
 import Battleships.model
 import Battleships.model.{Fleet, Position}
-
 import scala.util.{Failure, Success}
 
 class welcomeFXController extends Initializable{
@@ -32,12 +30,18 @@ class welcomeFXController extends Initializable{
   //OUR GAME COMPONENTS
   @FXML private var player : Label = _
   @FXML private var battleGrid : GridPane =_
+
   //PLACERS
   @FXML private var placeBattle : Button = _
   @FXML private var placeCruiser: Button = _
   @FXML private var placeSubmarine : Button = _
   @FXML private var dirBtn : Button = _
 
+  //BattleGridPanes and needed fields
+  @FXML private var gameStart : AnchorPane = _
+  @FXML private var player1_Grid : GridPane = _
+  @FXML private var player2_Grid : GridPane = _
+  @FXML private var turnLabel : Label = _
 
   //Save our setupinfoin these vars
   var battleField_Size : Int = _
@@ -49,7 +53,6 @@ class welcomeFXController extends Initializable{
   var length : Int = 0
   var setupStatus : Int = 0
   var shipDirection : Int = -1
-
 
   //PLAYER1 VARS
   var player1_battleships : Int = 0
@@ -63,7 +66,6 @@ class welcomeFXController extends Initializable{
   var player2_submarines : Int = 0
   var player2_fleet : Fleet = new Fleet(List(List(Position(0,0))))
 
-
   override def initialize(url: URL, rb: ResourceBundle): Unit = initGame()
   def initGame():Unit ={
     //HIDE OUR OTHER STATES
@@ -71,6 +73,9 @@ class welcomeFXController extends Initializable{
     setupgame.setManaged("Ich liebe "== "Scala")
     game.setVisible(false)
     game.setManaged(false)
+    //game Starting
+    gameStart.setVisible(false)
+    gameStart.setManaged(false)
   }
 
   @FXML private def startSetup(event: ActionEvent): Unit = {
@@ -239,7 +244,6 @@ class welcomeFXController extends Initializable{
     }
   }
 
-
   def shipReduction () : Unit = {
     if(setupStatus == 1) { //Setupstatus is one taht means player one is setting up
       length match {
@@ -279,7 +283,10 @@ class welcomeFXController extends Initializable{
           placeSubmarine.setText("Submarines: " + player2_submarines.toString)
         }
       }
-      if(player2_submarines+player2_cruisers+player2_battleships == 0) print(player2_fleet.shipsPos)
+      if(player2_submarines+player2_cruisers+player2_battleships == 0) {
+        (player1_fleet.shipsPos)
+        prepGame()
+      }
     }
   }
 
@@ -302,6 +309,16 @@ class welcomeFXController extends Initializable{
     battleGrid.getChildren.forEach(node => node.setStyle("-fx-background-color: #62BCFA"))
   }
 
+  def prepGame() : Unit = {
+    //DISABLE OUR PLACEMENT BUTTONS -Wir kenntn de a in an container packen wären nur 2 zeilen
+    game.setVisible(false)
+    game.setManaged(false)
+    //fifty fifty wer startet
+    val starter = scala.util.Random
+    var gameStatus = starter.nextInt(2) //kann 0 oder eins annehmen //wir könnten damit alle wenn gerade player 1 wenn ungerade player 2 für wer ist gerade dran
+    startgame(gameStatus)
+  }
+
   //just a small helper for small people
   def isAllDigits(x: String) = x forall Character.isDigit
 
@@ -310,6 +327,27 @@ class welcomeFXController extends Initializable{
     var result : Node = null
     children.forEach(node=>if(GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == column) result = node)
     result
+  }
+
+  def isEven(number: Int) = number % 2 == 0
+
+  def startgame (starter : Int) : Unit = {
+    gameStart.setManaged(true)
+    gameStart.setVisible(true)
+    if(isEven(starter)){ //player 1 ones turn so player 2 Grid is active
+      turnLabel.setText("Player 1´s turn")
+      player1_Grid.setManaged(false)
+      player1_Grid.setVisible(false)
+      player2_Grid.setManaged(true)
+      player2_Grid.setVisible(true)
+    }
+    if(!isEven(starter)){ //player 2 ones turn so player 1 Grid is active
+      turnLabel.setText("Player 2´s turn")
+      player1_Grid.setManaged(true)
+      player1_Grid.setVisible(true)
+      player2_Grid.setManaged(false)
+      player2_Grid.setVisible(false)
+    }
   }
 }
 
