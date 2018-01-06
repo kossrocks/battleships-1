@@ -38,16 +38,28 @@ class welcomeFXController extends Initializable{
   @FXML private var placeSubmarine : Button = _
   @FXML private var dirBtn : Button = _
 
+
   //Save our setupinfoin these vars
   var battleField_Size : Int = _
   var battleShips_Amount : Int = _
   var cruisers_Amount : Int = _
   var submarines_Amount : Int = _
 
-  //Testing
+  //GAME VARS IMPORTANT
   var length : Int = 0
   var setupStatus : Int = 0
   var shipDirection : Int = -1
+
+  //PLAYER1 VARS
+  var player1_battleships : Int = 0
+  var player1_cruisers : Int = 0
+  var player1_submarines : Int = 0
+
+  //PLAYER2 VARS
+  var player2_battleships : Int = battleShips_Amount
+  var player2_cruisers : Int = cruisers_Amount
+  var player2_submarines : Int = submarines_Amount
+
 
   override def initialize(url: URL, rb: ResourceBundle): Unit = initGame()
   def initGame():Unit ={
@@ -81,31 +93,19 @@ class welcomeFXController extends Initializable{
       game.setVisible(true)
       game.setManaged(true)
 
-    /*
-      //let us construct our field
-      var i = battleField_Size
-      while (i >= 1) {
-        battleGrid.addColumn(i)
-        battleGrid.addRow(i)
-        i -= 1
+      //SET PLAYER1 VARS
+      player1_battleships= battleShips_Amount
+      player1_cruisers= cruisers_Amount
+      player1_submarines= submarines_Amount
 
-      }
-      var pane : Pane = new Pane
-      pane.setMaxSize(20,20)
-      GridPane.setFillHeight(pane,true)
-      GridPane.setFillWidth(pane,true)
-      battleGrid.add(pane,0,0)
-      pane.setStyle("-fx-background-color: #62BCFA")
 
-     // battleGrid.add(newbutton,1,1)
-      //GridPane.setFillWidth(newbutton, true)
-      //GridPane.setFillHeight(newbutton, true)
-
-      // we need that later newbutton.setOnAction()
-    */
+      //SET TEXT OF OUR BUTTONS
+      placeBattle.setText("Battleships: " + battleShips_Amount.toString)
+      placeCruiser.setText("Cruisers: " + cruisers_Amount.toString)
+      placeSubmarine.setText("Submarines: " + submarines_Amount.toString)
     }
-
   }
+
   @FXML private def changeDir(event: ActionEvent): Unit ={
     shipDirection match {
       case -1 => {
@@ -139,7 +139,9 @@ class welcomeFXController extends Initializable{
     node.setStyle("-fx-background-color: #36403B")
     print(x+1,y+1,id)
     */
-    if(setupStatus == 1) {
+    if(setupStatus == 1 || setupStatus == 3) {
+      if(!shipPlaceCheck()) println("Please choose another ship") //returns false if the chosen ship amount is 0
+      else{
       player.setText("Place your Ship")
       var node : Node = event.getPickResult.getIntersectedNode
       var x = GridPane.getColumnIndex(node)
@@ -152,6 +154,7 @@ class welcomeFXController extends Initializable{
           if(i>6) println("This wont fit")
           else{
             selectedNode.setStyle("-fx-background-color: #36403B")
+            shipReduction()
             while(i > x) {
               var tinynode = getNode(if(i == 0) null else i, y, battleGrid)
               tinynode.setStyle("-fx-background-color: #36403B")
@@ -164,6 +167,7 @@ class welcomeFXController extends Initializable{
           if(i<0)println("This wont fit")
           else {
             selectedNode.setStyle("-fx-background-color: #36403B")
+            shipReduction()
             while(i < x) {
               var tinynode = getNode(if(i == 0) null else i, y, battleGrid)
               tinynode.setStyle("-fx-background-color: #36403B")
@@ -176,8 +180,9 @@ class welcomeFXController extends Initializable{
           if(i > 6) println("This wont fit")
           else{
             selectedNode.setStyle("-fx-background-color: #36403B")
+            shipReduction()
             while(i > y) {
-              var tinynode = getNode(x, i, battleGrid)
+              var tinynode = getNode(x, if(i == 0) null else i, battleGrid)
               tinynode.setStyle("-fx-background-color: #36403B")
               i = i - 1
             }
@@ -188,8 +193,9 @@ class welcomeFXController extends Initializable{
           if(i < 0) println("This wont fit")
           else{
             selectedNode.setStyle("-fx-background-color: #36403B")
+            shipReduction()
             while(i < y) {
-              var tinynode = getNode(x, i, battleGrid)
+              var tinynode = getNode(x, if(i == 0) null else i, battleGrid)
               tinynode.setStyle("-fx-background-color: #36403B")
               i = i + 1
             }
@@ -197,16 +203,75 @@ class welcomeFXController extends Initializable{
         }
       }
     }
+    }
     else println("Select a Ship first")
+  }
+  def shipPlaceCheck(): Boolean = {
+    if (setupStatus == 1) {
+      length match {
+        case 5 => if (player1_battleships > 0) true else false
+        case 3 => if (player1_cruisers > 0) true else false
+        case 2 => if (player1_submarines > 0) true else false
+      }
+    }
+    else {
+      length match {
+        case 5 => if (player1_battleships > 0) true else false
+        case 3 => if (player1_cruisers > 0) true else false
+        case 2 => if (player1_submarines > 0) true else false
+      }
+    }
+  }
 
+
+  def shipReduction () : Unit = {
+    if(setupStatus == 1) { //Setupstatus is one taht means player one is setting up
+      length match {
+        case 5 => {
+          if (player1_battleships > 0) {
+            player1_battleships -= 1
+            placeBattle.setText("Battleships: " + player1_battleships.toString)
+          }
+        }
+        case 3 => {
+          if (player1_cruisers > 0){
+            player1_cruisers -= 1
+            placeCruiser.setText("Cruisers: " + player1_cruisers.toString)
+          }
+        }
+        case 2 =>{
+          if(player1_submarines > 0) {
+            player1_submarines -= 1
+            placeSubmarine.setText("Submarines: " + player1_submarines.toString)
+          }
+        }
+      }
+    if(player1_submarines+player1_cruisers+player1_battleships ==0) println("Let Player 2 Place his stuff")
+    }
+    else{ //setupstatus is not one and this function gets called means player 2 is setting up
+      length match {
+        case 5 => if (player2_battleships > 0) {
+          player2_battleships -= 1
+          placeBattle.setText("Battleships: " + player2_battleships.toString)
+        }
+        case 3 => if (player2_cruisers > 0) {
+          player2_cruisers -= 1
+          placeCruiser.setText("Cruisers: " + player2_cruisers.toString)
+        }
+        case 2 => if (player2_submarines > 0) {
+          player2_submarines -= 1
+          placeSubmarine.setText("Submarines: " + player2_submarines.toString)
+        }
+      }
+    }
   }
 
   //EXECUTED A PLACEMENT BUTTON GETS CLICKED
   @FXML private def placeShip(event: ActionEvent): Unit = {
-    var node = event.getSource().toString
-    if(node == "Button[id=placeBattle, styleClass=button]'Place a Battleship'") length = 5
-    if(node == "Button[id=placeCruiser, styleClass=button]'Place a Cruiser'") length = 3
-    if(node == "Button[id=placeSubmarine, styleClass=button]'Place a Submarine'") length = 2
+    var node = event.getSource().toString.take(22)
+    if(node == "Button[id=placeBattle,") length = 5
+    if(node == "Button[id=placeCruiser") length = 3
+    if(node == "Button[id=placeSubmari") length = 2
     player.setText("Select Starting Point")
     setupStatus = 1 //Ship is selected and length is set.
   }
