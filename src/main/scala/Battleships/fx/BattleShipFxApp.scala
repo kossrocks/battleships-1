@@ -21,6 +21,7 @@ class BattleShipFX extends Application {
     stage.setTitle("Battleships")
     stage.setScene(new Scene(root))
     stage.getScene.getStylesheets.add(css)
+    stage.setResizable(false) //damit ma uns alle ka scheiße antun müssn
     stage.show()
   }
 
