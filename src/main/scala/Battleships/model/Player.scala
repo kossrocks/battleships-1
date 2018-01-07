@@ -1,6 +1,6 @@
 package Battleships.model
 
-case class Player (id : Int, name : String) {
+case class Player (name : String) {
 
   var shots = List(Position(0, 0))
   var takenshots = 0 //besser als length von shots zu nehmen
@@ -9,22 +9,24 @@ case class Player (id : Int, name : String) {
     getElem(this.shots, turn)
   }
 
-  def shoot (shotPos: Position, flotte : Fleet) : Unit = {
+  def shoot (shotPos: Position, flotte : Fleet) : Int = {
+    var result = 3 //wenn nicht geändert dann daneben 0---> bereits getroffen 1---> treffer 2 ----> zerstört 3 ---> daneben
     require(shotPos != Position(0,0),"Diese Koordinate ist reserviert wird für Fehlerbugging verwendet gibt es im Spiel nicht")
-    if(existIn(shotPos,this.shots)) println("Auf Koordinate " + shotPos + " wurde bereits gefeuert.") //funktion terminiert
+    if(existIn(shotPos,this.shots)) 0 //println("Auf Koordinate " + shotPos + " wurde bereits gefeuert.") //funktion terminiert
     else { //Treffer existiert noch nicht wir durchsuchen die Liste
       var i = 0
-      while(i < flotte.ships.length) { //auch wenn getroffen sucht weiter
+      while(i < flotte.shipsPos.length) { //auch wenn getroffen sucht weiter
         var PosList = getElemListPos(flotte.shipsPos,i)
         if(findElemPos(shotPos,PosList) != Position(0,0)){
-          println("Das Schiff " + i + " wurde an der Koordinate " + shotPos + " getroffen." + PosList.length)
-          if(PosList.length == 1) println("Ein Schiff wurde zerstört !") //Wenn zum Zeitpunkt des Treffers die länge der betroffenen Liste eins ist ist danach das Schiff zerstört ;)
+          result = 1 // /println("Das Schiff " + i + " wurde an der Koordinate " + shotPos + " getroffen." + PosList.length)
+          if(PosList.length == 1) result = 2 //println("Ein Schiff wurde zerstört !") //Wenn zum Zeitpunkt des Treffers die länge der betroffenen Liste eins ist ist danach das Schiff zerstört ;)
           flotte.removeHit(shotPos) //Wenn Treffer wird Koordinate entfernt
         }
         i += 1
       }
       takenshots += 1 //egal ob getroffen oder nicht takenshots wird um 1 erhöht
       shots = shots ::: List(shotPos) //der Schuss wird der Liste angefügt
+      result
     }
   }
 

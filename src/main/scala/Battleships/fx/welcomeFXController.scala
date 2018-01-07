@@ -8,8 +8,10 @@ import java.util.ResourceBundle
 import javafx.fxml.{FXML, Initializable}
 import javafx.scene.control.{Button, Label, TextArea, TextField}
 import javafx.scene.input.MouseEvent
+
 import Battleships.model
-import Battleships.model.{Fleet, Position}
+import Battleships.model.{Fleet, Player, Position}
+
 import scala.util.{Failure, Success}
 
 class welcomeFXController extends Initializable{
@@ -347,6 +349,32 @@ class welcomeFXController extends Initializable{
       player1_Grid.setVisible(true)
       player2_Grid.setManaged(false)
       player2_Grid.setVisible(false)
+    }
+  }
+
+  var player1 = Player("Peter")
+  var player2 = Player("Franz")
+
+  @FXML private def shootGrid(event: MouseEvent): Unit ={
+    var node : Node = event.getPickResult.getIntersectedNode
+    var x = GridPane.getColumnIndex(node)
+    var y = GridPane.getRowIndex(node)
+    player1.shoot(Position(x+1,y+1),player2_fleet) match {
+      case 0 => {
+        println("Shoot again you already shot there")
+      }
+      case 1 => {
+        println("You hit a ship")
+        node.setStyle("-fx-background-color: #C43235")
+      }
+      case 2 => {
+        println("You destroyed a ship!")
+        node.setStyle("-fx-background-color: #C43235")
+      }
+      case 3 => {
+        println("You missed")
+        node.setStyle("-fx-background-color: #36403B")
+        }
     }
   }
 }
