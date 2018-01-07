@@ -1,18 +1,12 @@
 import javafx.event.ActionEvent
-import javafx.fxml.{FXML, FXMLLoader, Initializable}
 import javafx.scene.layout.{AnchorPane, GridPane, Pane}
 import javafx.scene._
-import javafx.stage.Stage
 import java.net.URL
 import java.util.ResourceBundle
 import javafx.fxml.{FXML, Initializable}
-import javafx.scene.control.{Button, Label, TextArea, TextField}
+import javafx.scene.control.{Button, Label, TextField}
 import javafx.scene.input.MouseEvent
-
-import Battleships.model
 import Battleships.model.{Fleet, Player, Position}
-
-import scala.util.{Failure, Success}
 
 class welcomeFXController extends Initializable{
 
