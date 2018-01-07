@@ -153,6 +153,9 @@ class welcomeFXController extends Initializable{
         //WE got now our Starting node now its time to calculate the direction a and fetch the POS
         var Ship =List(Position(x+1,y+1))
         shipDirection match{
+          case -1 => {
+            println("Please select a Direction first")
+          }
           case 0 => {
             var i = x + length -1
             if(i>6) println("This wont fit")
