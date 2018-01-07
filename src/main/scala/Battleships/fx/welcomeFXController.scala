@@ -355,7 +355,7 @@ class welcomeFXController extends Initializable{
   var player1 = Player("Peter")
   var player2 = Player("Franz")
 
-  @FXML private def shootGrid(event: MouseEvent): Unit ={
+  @FXML private def shootGridP1(event: MouseEvent): Unit ={
     var node : Node = event.getPickResult.getIntersectedNode
     var x = GridPane.getColumnIndex(node)
     var y = GridPane.getRowIndex(node)
@@ -370,11 +370,49 @@ class welcomeFXController extends Initializable{
       case 2 => {
         println("You destroyed a ship!")
         node.setStyle("-fx-background-color: #C43235")
+        if(player2_fleet.shipsPos.length == 1)println("EZ GG you won Player 2 sucks!")
+        print(player2_fleet.shipsPos.length)
       }
       case 3 => {
         println("You missed")
         node.setStyle("-fx-background-color: #36403B")
-        }
+        player1_Grid.setManaged(false)
+        player1_Grid.setVisible(false)
+        player2_Grid.setManaged(true)
+        player2_Grid.setVisible(true)
+        turnLabel.setText("Player 2´s turn")
+      }
+    }
+  }
+
+  @FXML private def shootGridP2(event: MouseEvent): Unit ={
+    var node : Node = event.getPickResult.getIntersectedNode
+    var x = GridPane.getColumnIndex(node)
+    var y = GridPane.getRowIndex(node)
+    player2.shoot(Position(x+1,y+1),player1_fleet) match {
+      case 0 => {
+        println("Shoot again you already shot there")
+      }
+      case 1 => {
+        println("You hit a ship")
+        node.setStyle("-fx-background-color: #C43235")
+      }
+      case 2 => {
+        println("You destroyed a ship!")
+        node.setStyle("-fx-background-color: #C43235")
+        if(player1_fleet.shipsPos.length == 1) println("You won !!GG EZ GET REKT")
+        print(player1_fleet.shipsPos.length)
+      }
+      case 3 => {
+        println("You missed")
+        node.setStyle("-fx-background-color: #36403B")
+        //versteck die das jetzige gridpane zeig das neue gg
+        player1_Grid.setManaged(true)
+        player1_Grid.setVisible(true)
+        player2_Grid.setManaged(false)
+        player2_Grid.setVisible(false)
+        turnLabel.setText("Player 1´s turn")
+      }
     }
   }
 }

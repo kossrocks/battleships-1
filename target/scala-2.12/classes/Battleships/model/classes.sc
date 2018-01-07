@@ -76,6 +76,10 @@ case class Fleet (ships : List[List[Position]]) {
   def removeHit (Pos : Position) : Unit = { //Funktion entfernt Treffer aus gegebener List Liste von Positionen
     shipsPos = shipsPos.map(x => x.filter(_ != Pos))
   }
+
+  def addship(list : List[List[Position]]):Unit ={
+    shipsPos = shipsPos ::: list
+  }
 }
 
 case class Ship (length : Int , startPos : Position , direction : String) {
