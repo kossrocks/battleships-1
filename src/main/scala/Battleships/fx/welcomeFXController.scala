@@ -1,5 +1,5 @@
 import javafx.event.ActionEvent
-import javafx.scene.layout.{AnchorPane, GridPane, Pane}
+import javafx.scene.layout.{AnchorPane, GridPane}
 import javafx.scene._
 import java.net.URL
 import java.util.ResourceBundle

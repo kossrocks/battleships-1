@@ -18,3 +18,4 @@ case class Battlefield (var size :Int) {
     }
   }
 }
+//not needed and not used !
