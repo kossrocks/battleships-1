@@ -61,12 +61,14 @@ class welcomeFXController extends Initializable{
   var player1_cruisers : Int = 0
   var player1_submarines : Int = 0
   var player1_fleet : Fleet = new Fleet(List(List(Position(0,0))))
+  var player1_zerstoert : Int = 0
 
   //PLAYER2 VARS
   var player2_battleships : Int = 0
   var player2_cruisers : Int = 0
   var player2_submarines : Int = 0
   var player2_fleet : Fleet = new Fleet(List(List(Position(0,0))))
+  var player2_zerstoert : Int = 0
 
   override def initialize(url: URL, rb: ResourceBundle): Unit = initGame()
   def initGame():Unit ={
@@ -370,8 +372,10 @@ class welcomeFXController extends Initializable{
       case 2 => {
         println("You destroyed a ship!")
         node.setStyle("-fx-background-color: #C43235")
-        if(player2_fleet.shipsPos.length == 1)println("EZ GG you won Player 2 sucks!")
-        print(player2_fleet.shipsPos.length)
+        player1_zerstoert += 1
+        if(player1_zerstoert == battleShips_Amount+submarines_Amount+cruisers_Amount) {
+          end(0)
+        }
       }
       case 3 => {
         println("You missed")
@@ -400,8 +404,10 @@ class welcomeFXController extends Initializable{
       case 2 => {
         println("You destroyed a ship!")
         node.setStyle("-fx-background-color: #C43235")
-        if(player1_fleet.shipsPos.length == 1) println("You won !!GG EZ GET REKT")
-        print(player1_fleet.shipsPos.length)
+        player2_zerstoert += 1
+        if(player2_zerstoert == battleShips_Amount+submarines_Amount+cruisers_Amount){
+          end(1)
+        }
       }
       case 3 => {
         println("You missed")
@@ -413,6 +419,19 @@ class welcomeFXController extends Initializable{
         player2_Grid.setVisible(false)
         turnLabel.setText("Player 1´s turn")
       }
+    }
+  }
+
+  def end(i : Int):Unit = {
+    player1_Grid.setManaged(false)
+    player1_Grid.setVisible(false)
+    player2_Grid.setManaged(false)
+    player2_Grid.setVisible(false)
+    if(i == 0){
+      turnLabel.setText("Player 1 won!")
+    }
+    else{
+      turnLabel.setText("Player 2 won!")
     }
   }
 }
