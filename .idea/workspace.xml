@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="cbc01ee0-7316-4d43-8f43-83abef436b11" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/scala/Battleships/fx/BattleShipFxApp.scala" afterPath="$PROJECT_DIR$/src/main/scala/Battleships/fx/BattleShipFxApp.scala" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/Battleships/fx/welcome.fxml" afterPath="$PROJECT_DIR$/src/main/scala/Battleships/fx/welcome.fxml" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/Battleships/fx/welcomeFXController.scala" afterPath="$PROJECT_DIR$/src/main/scala/Battleships/fx/welcomeFXController.scala" />
       <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/Battleships/fx/BattleShipFX.class" afterPath="$PROJECT_DIR$/target/scala-2.12/classes/Battleships/fx/BattleShipFX.class" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -67,8 +68,8 @@
       <file leaf-file-name="welcomeFXController.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/Battleships/fx/welcomeFXController.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1088">
-              <caret line="64" column="33" lean-forward="false" selection-start-line="64" selection-start-column="33" selection-end-line="64" selection-end-column="33" />
+            <state relative-caret-position="299">
+              <caret line="25" column="38" lean-forward="true" selection-start-line="25" selection-start-column="38" selection-end-line="25" selection-end-column="38" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -90,7 +91,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/scala/Battleships/fx/welcome.fxml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
-              <caret line="125" column="23" lean-forward="false" selection-start-line="125" selection-start-column="23" selection-end-line="125" selection-end-column="23" />
+              <caret line="123" column="23" lean-forward="false" selection-start-line="123" selection-start-column="23" selection-end-line="123" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -174,6 +175,7 @@
       <find>battlegrid</find>
       <find>for</find>
       <find>id</find>
+      <find>battlesi</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -204,8 +206,8 @@
         <option value="$PROJECT_DIR$/src/main/scala/Battleships/fx/welcome.fxml" />
         <option value="$PROJECT_DIR$/src/main/scala/Battleships/model/Player.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Battleships/model/classes.sc" />
-        <option value="$PROJECT_DIR$/src/main/scala/Battleships/fx/welcomeFXController.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/Battleships/fx/BattleShipFxApp.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/Battleships/fx/welcomeFXController.scala" />
       </list>
     </option>
   </component>
@@ -273,6 +275,38 @@
               <item name="scala" type="462c0819:PsiDirectoryNode" />
               <item name="Battleships" type="462c0819:PsiDirectoryNode" />
               <item name="fx" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Battleships" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Battleships" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="scala" type="462c0819:PsiDirectoryNode" />
+              <item name="Battleships" type="462c0819:PsiDirectoryNode" />
+              <item name="fx" type="462c0819:PsiDirectoryNode" />
+              <item name="BattleShipFxApp.scala" type="6117b065:FileNode" />
+            </path>
+            <path>
+              <item name="Battleships" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Battleships" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="scala" type="462c0819:PsiDirectoryNode" />
+              <item name="Battleships" type="462c0819:PsiDirectoryNode" />
+              <item name="fx" type="462c0819:PsiDirectoryNode" />
+              <item name="BattleShipFxApp.scala" type="6117b065:FileNode" />
+              <item name="BattleShipFX" type="ce8f04f3:TypeDefinitionNode" />
+            </path>
+            <path>
+              <item name="Battleships" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Battleships" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="scala" type="462c0819:PsiDirectoryNode" />
+              <item name="Battleships" type="462c0819:PsiDirectoryNode" />
+              <item name="fx" type="462c0819:PsiDirectoryNode" />
+              <item name="BattleShipFxApp.scala" type="6117b065:FileNode" />
+              <item name="BattleShipGame$" type="ce8f04f3:TypeDefinitionNode" />
             </path>
             <path>
               <item name="Battleships" type="b2602c69:ProjectViewProjectNode" />
@@ -640,7 +674,14 @@
       <option name="project" value="LOCAL" />
       <updated>1515305679268</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="kA wsl bissl was verkehrt beim turnswitch wincondition geht net wie lösen?&#10;-nachdenken wann wer dran is :D&#10;&#10;------BUGFIXES---------&#10;-Fenster is jz net mehr kann man jz net mehr rezisen&#10;-Winconditions gehen&#10;&#10;TODO:&#10;-Exception beim Setup&#10;-battlesize irrelevant&#10;-Setup Player names erstellen sind zurzeit hardcoded&#10;-wenn gewollt könnma größe dynamisch anpassen. ACHTUNG:Auf Hardcoded Parameter aufpassen sonst fliegt uns der Scheiß um die Ohren&#10;-sich nicht ändernde parameter von var -&gt; val für Leistung und schönheit&#10;-&gt;!!!!!!überlappende Schiffe beim Setup!!!!!!!!">
+      <created>1515306207093</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1515306207093</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -721,7 +762,8 @@
     <MESSAGE value="Shoot is jz implementiert und läuft turnswitch und winconditions dann fertig." />
     <MESSAGE value="kA wsl bissl was verkehrt beim turnswitch wincondition geht net wie lösen?&#10;-nachdenken wann wer dran is :D&#10;-wincondition mitzählen wieviel jeder zerstört hat sprich&#10;case 3 ---&gt;P1zerstört +1 if P1zerstört == battlesjhips +cruiser + submarines&#10;hast gwonnen i geh schlafn" />
     <MESSAGE value="kA wsl bissl was verkehrt beim turnswitch wincondition geht net wie lösen?&#10;-nachdenken wann wer dran is :D" />
-    <option name="LAST_COMMIT_MESSAGE" value="kA wsl bissl was verkehrt beim turnswitch wincondition geht net wie lösen?&#10;-nachdenken wann wer dran is :D" />
+    <MESSAGE value="kA wsl bissl was verkehrt beim turnswitch wincondition geht net wie lösen?&#10;-nachdenken wann wer dran is :D&#10;&#10;------BUGFIXES---------&#10;-Fenster is jz net mehr kann man jz net mehr rezisen&#10;-Winconditions gehen&#10;&#10;TODO:&#10;-Exception beim Setup&#10;-battlesize irrelevant&#10;-Setup Player names erstellen sind zurzeit hardcoded&#10;-wenn gewollt könnma größe dynamisch anpassen. ACHTUNG:Auf Hardcoded Parameter aufpassen sonst fliegt uns der Scheiß um die Ohren&#10;-sich nicht ändernde parameter von var -&gt; val für Leistung und schönheit&#10;-&gt;!!!!!!überlappende Schiffe beim Setup!!!!!!!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="kA wsl bissl was verkehrt beim turnswitch wincondition geht net wie lösen?&#10;-nachdenken wann wer dran is :D&#10;&#10;------BUGFIXES---------&#10;-Fenster is jz net mehr kann man jz net mehr rezisen&#10;-Winconditions gehen&#10;&#10;TODO:&#10;-Exception beim Setup&#10;-battlesize irrelevant&#10;-Setup Player names erstellen sind zurzeit hardcoded&#10;-wenn gewollt könnma größe dynamisch anpassen. ACHTUNG:Auf Hardcoded Parameter aufpassen sonst fliegt uns der Scheiß um die Ohren&#10;-sich nicht ändernde parameter von var -&gt; val für Leistung und schönheit&#10;-&gt;!!!!!!überlappende Schiffe beim Setup!!!!!!!!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -950,7 +992,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/scala/Battleships/fx/welcome.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
-          <caret line="125" column="23" lean-forward="false" selection-start-line="125" selection-start-column="23" selection-end-line="125" selection-end-column="23" />
+          <caret line="123" column="23" lean-forward="false" selection-start-line="123" selection-start-column="23" selection-end-line="123" selection-end-column="23" />
           <folding />
         </state>
       </provider>
@@ -978,8 +1020,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/Battleships/fx/welcomeFXController.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1088">
-          <caret line="64" column="33" lean-forward="false" selection-start-line="64" selection-start-column="33" selection-end-line="64" selection-end-column="33" />
+        <state relative-caret-position="299">
+          <caret line="25" column="38" lean-forward="true" selection-start-line="25" selection-start-column="38" selection-end-line="25" selection-end-column="38" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>

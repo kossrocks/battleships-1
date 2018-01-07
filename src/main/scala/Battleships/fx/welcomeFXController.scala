@@ -16,7 +16,6 @@ class welcomeFXController extends Initializable{
   @FXML private var game: AnchorPane = _
 
   //Our Setupfields and Button
-  @FXML private var battleSize: TextField = _
   @FXML private var battleShips: TextField = _
   @FXML private var cruisers: TextField = _
   @FXML private var submarines: TextField = _
@@ -85,11 +84,10 @@ class welcomeFXController extends Initializable{
 
   @FXML private def startgame(event: ActionEvent): Unit ={
     println("Loading Game")
-    var setupString = battleSize.getText + battleShips.getText + cruisers.getText + submarines.getText //contains all our strings so if statement is shorter ;)
+    var setupString = battleShips.getText + cruisers.getText + submarines.getText //contains all our strings so if statement is shorter ;)
     if(setupString.isEmpty || !isAllDigits(setupString)) setupError.setText("Please put Numbers in every field and try again!")
     else{
       //FETCH OUR SETTINGS
-      battleField_Size = battleSize.getText.toInt
       battleShips_Amount = battleShips.getText.toInt
       cruisers_Amount = cruisers.getText.toInt
       submarines_Amount = submarines.getText.toInt
