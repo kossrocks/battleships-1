@@ -1,12 +1,16 @@
 package Battleships.model
 
-case class Player (name : String) {
-
+case class Player (playername : String) {
+  var name = playername
   var shots = List(Position(0, 0))
   var takenshots = 0 //besser als length von shots zu nehmen
 
   def getShot(turn: Int) = { //function fürn slider
     getElem(this.shots, turn)
+  }
+
+  def setName(playname : String): Unit ={
+    name = playname
   }
 
   def shoot (shotPos: Position, flotte : Fleet) : Int = {
