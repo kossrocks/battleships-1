@@ -16,6 +16,8 @@ class welcomeFXController extends Initializable{
   @FXML private var game: AnchorPane = _
 
   //Our Setupfields and Button
+  @FXML private var player1Name: TextField = _
+  @FXML private var player2Name: TextField = _
   @FXML private var battleShips: TextField = _
   @FXML private var cruisers: TextField = _
   @FXML private var submarines: TextField = _
@@ -50,6 +52,7 @@ class welcomeFXController extends Initializable{
   var shipDirection : Int = -1
 
   //PLAYER1 VARS
+  var player1 = Player("Player1")
   var player1_battleships : Int = 0
   var player1_cruisers : Int = 0
   var player1_submarines : Int = 0
@@ -57,6 +60,7 @@ class welcomeFXController extends Initializable{
   var player1_zerstoert : Int = 0
 
   //PLAYER2 VARS
+  var player2 = Player("Player2")
   var player2_battleships : Int = 0
   var player2_cruisers : Int = 0
   var player2_submarines : Int = 0
@@ -84,13 +88,18 @@ class welcomeFXController extends Initializable{
 
   @FXML private def startgame(event: ActionEvent): Unit ={
     println("Loading Game")
-    var setupString = battleShips.getText + cruisers.getText + submarines.getText //contains all our strings so if statement is shorter ;)
-    if(setupString.isEmpty || !isAllDigits(setupString) || battleShips.getText.toInt + cruisers.getText.toInt + submarines.getText.toInt == 0) setupError.setText("Only Numbers above 0 are allowed!")
+    val setupString = battleShips.getText + cruisers.getText + submarines.getText //contains all our strings so if statement is shorter ;)
+    if(setupString.isEmpty || !isAllDigits(setupString) || battleShips.getText.toInt + cruisers.getText.toInt + submarines.getText.toInt == 0 || player1Name.getText.isEmpty || player2Name.getText.isEmpty) setupError.setText("Only Numbers above 0 are allowed! And fill all fields!")
     else{
+      println(player1.name,player2.name)
       //FETCH OUR SETTINGS
       battleShips_Amount = battleShips.getText.toInt
       cruisers_Amount = cruisers.getText.toInt
       submarines_Amount = submarines.getText.toInt
+
+      //SET Player NAMES
+      player1.setName(player1Name.getText)
+      player2.setName(player2Name.getText)
 
       //NOW SETUP THE GAME
       setupgame.getChildren.clear()
@@ -108,6 +117,9 @@ class welcomeFXController extends Initializable{
       player2_battleships= battleShips_Amount
       player2_cruisers= cruisers_Amount
       player2_submarines= submarines_Amount
+
+      //Set STAT INFO
+      player.setText(player1.name + " it´s your turn!")
 
       //SET TEXT OF OUR BUTTONS
       placeBattle.setText("Battleships: " + battleShips_Amount.toString)
@@ -300,7 +312,7 @@ class welcomeFXController extends Initializable{
 
   def changePlayerSetup() : Unit = {
     setupStatus = 3
-    player.setText("Player 2 Place your shit")
+    player.setText(player2.name + " it´s your turn!")
     placeBattle.setText("Battleships: " + player2_battleships.toString)
     placeCruiser.setText("Cruisers: " + player2_cruisers.toString)
     placeSubmarine.setText("Submarines: " + player2_submarines.toString)
@@ -334,23 +346,20 @@ class welcomeFXController extends Initializable{
     gameStart.setManaged(true)
     gameStart.setVisible(true)
     if(isEven(starter)){ //player 1 ones turn so player 2 Grid is active
-      turnLabel.setText("Player 1´s turn")
+      turnLabel.setText(player1.name + " starts!")
       player1_Grid.setManaged(false)
       player1_Grid.setVisible(false)
       player2_Grid.setManaged(true)
       player2_Grid.setVisible(true)
     }
     if(!isEven(starter)){ //player 2 ones turn so player 1 Grid is active
-      turnLabel.setText("Player 2´s turn")
+      turnLabel.setText(player2.name + " starts!")
       player1_Grid.setManaged(true)
       player1_Grid.setVisible(true)
       player2_Grid.setManaged(false)
       player2_Grid.setVisible(false)
     }
   }
-
-  var player1 = Player("Peter") // Jz glei outsourcen!
-  var player2 = Player("Franz")
 
   @FXML private def shootGridP1(event: MouseEvent): Unit ={
     var node : Node = event.getPickResult.getIntersectedNode
@@ -379,7 +388,7 @@ class welcomeFXController extends Initializable{
         player1_Grid.setVisible(false)
         player2_Grid.setManaged(true)
         player2_Grid.setVisible(true)
-        turnLabel.setText("Player 2´s turn")
+        turnLabel.setText("It´s " + player2.name + " turn")
       }
     }
   }
@@ -412,7 +421,7 @@ class welcomeFXController extends Initializable{
         player1_Grid.setVisible(true)
         player2_Grid.setManaged(false)
         player2_Grid.setVisible(false)
-        turnLabel.setText("Player 1´s turn")
+        turnLabel.setText("It´s " + player1.name + " turn")
       }
     }
   }
@@ -423,10 +432,10 @@ class welcomeFXController extends Initializable{
     player2_Grid.setManaged(false)
     player2_Grid.setVisible(false)
     if(i == 0){
-      turnLabel.setText("Player 1 won!")
+      turnLabel.setText(player1.name + " won!")
     }
     else{
-      turnLabel.setText("Player 2 won!")
+      turnLabel.setText(player2.name + " won!")
     }
   }
 }
