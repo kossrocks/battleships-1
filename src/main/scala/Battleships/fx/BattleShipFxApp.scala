@@ -1,11 +1,8 @@
 package Battleships.fx
-
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
 import javafx.scene.{Parent, Scene}
 import javafx.stage.Stage
-
-import scala.util.control.NonFatal
 
 object BattleShipGame {
   def main(args: Array[String]): Unit = {

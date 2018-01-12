@@ -85,7 +85,7 @@ class welcomeFXController extends Initializable{
   @FXML private def startgame(event: ActionEvent): Unit ={
     println("Loading Game")
     var setupString = battleShips.getText + cruisers.getText + submarines.getText //contains all our strings so if statement is shorter ;)
-    if(setupString.isEmpty || !isAllDigits(setupString)) setupError.setText("Please put Numbers in every field and try again!")
+    if(setupString.isEmpty || !isAllDigits(setupString) || battleShips.getText.toInt + cruisers.getText.toInt + submarines.getText.toInt == 0) setupError.setText("Only Numbers above 0 are allowed!")
     else{
       //FETCH OUR SETTINGS
       battleShips_Amount = battleShips.getText.toInt
@@ -349,7 +349,7 @@ class welcomeFXController extends Initializable{
     }
   }
 
-  var player1 = Player("Peter")
+  var player1 = Player("Peter") // Jz glei outsourcen!
   var player2 = Player("Franz")
 
   @FXML private def shootGridP1(event: MouseEvent): Unit ={
