@@ -276,6 +276,7 @@
                   <Pane prefHeight="200.0" prefWidth="200.0" styleClass="pane-blue" GridPane.columnIndex="6" GridPane.rowIndex="6" />
                </children>
             </GridPane>
+            <Button mnemonicParsing="false" text="Save" AnchorPane.leftAnchor="500.0" AnchorPane.topAnchor="10.0" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="blenderAnch" prefHeight="400.0" prefWidth="600.0" styleClass="pane-blender">
@@ -283,7 +284,7 @@
             <Pane fx:id="blender" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="DEBUG_A" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Button fx:id="DEBUG_B" layoutX="108.0" layoutY="361.0" mnemonicParsing="false" onAction="#DEBUGB" text="TOBATT" />
             <Button fx:id="DEBUG_E" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#DEBUGE" text="TOEDIT" />

@@ -48,6 +48,7 @@ class welcomeFXController extends Initializable{
   //DEBUG
   @FXML private var DEBUG_E : Button = _
   @FXML private var DEBUG_B : Button = _
+  @FXML private var DEBUG_A : AnchorPane = _
 
   //Save our setupinfoin these vars
   var battleField_Size : Int = _
@@ -88,6 +89,9 @@ class welcomeFXController extends Initializable{
     //Disable our Blenders
     blenderAnch.setVisible(false) //SIND JZ DISABLED bind ma noch a funktion dran
     blenderAnch.setManaged(false)
+
+    DEBUG_A.setManaged(false)
+    DEBUG_A.setVisible(false)
   }
 
   @FXML private def startSetup(event: ActionEvent): Unit = {
@@ -192,11 +196,13 @@ class welcomeFXController extends Initializable{
               selectedNode.setStyle("-fx-background-color: #36403B")
               while(i > x) {
                 var tinynode = getNode(if(i == 0) null else i, y, battleGrid)
-                tinynode.setStyle("-fx-background-color: #36403B")
                 Ship = Ship ::: List(Position(i+1,y+1))
                 i = i - 1
               }
-              if(setupStatus == 1) player1_fleet.addShip(List(Ship)) //duplicate Code otherwhise ship will not be added watch how code gets executed!
+              if(setupStatus == 1) {
+                Ship.foreach(coords => getNode((coords.x-1),(coords.y-1),battleGrid).setStyle("-fx-background-color: #36403B"))
+                player1_fleet.addShip(List(Ship)) //duplicate Code otherwhise ship will not be added watch how code gets executed!
+              }
               if(setupStatus == 3) player2_fleet.addShip(List(Ship))
               shipReduction() //afterwards is ESSENTIAL DO NOT TOUCH PLS
             }
