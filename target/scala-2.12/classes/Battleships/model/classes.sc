@@ -136,3 +136,19 @@ case class Player (id : Int, name : String) {
   }
 }
 //CLASSES END
+val shot = Position(3,3)
+val list = List(List(Position(4,4),Position(1,2)),List(Position(3,3),Position(1,1)))
+//hasSimiliarElements(List(exis,list)
+existIn(shot,list)
+/*
+def existInLoopale (elem1 : Position, elem2 : List[List[Position]]): Boolean = {
+  elem2.length match{
+    case 0 => false
+    case otherwhise => {
+      if(existIn(elem1,elem2.head)) true
+      else exi
+    }
+  }
+}
+
+*/
