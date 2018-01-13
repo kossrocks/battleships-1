@@ -45,6 +45,10 @@ class welcomeFXController extends Initializable{
   @FXML private var blenderAnch : AnchorPane = _
   @FXML private var blender : Pane = _
 
+  //DEBUG
+  @FXML private var DEBUG_E : Button = _
+  @FXML private var DEBUG_B : Button = _
+
   //Save our setupinfoin these vars
   var battleField_Size : Int = _
   var battleShips_Amount : Int = _
@@ -450,6 +454,23 @@ class welcomeFXController extends Initializable{
     else{
       turnLabel.setText(player2.name + " won!")
     }
+  }
+  @FXML def DEBUGB(event: ActionEvent): Unit = {
+    gameStart.setManaged(true)
+    gameStart.setVisible(true)
+    rootpane.setManaged(false)
+    rootpane.setVisible(false)
+    game.setManaged(false)
+    game.setVisible(false)
+  }
+
+  @FXML def DEBUGE(event: ActionEvent): Unit = {
+    game.setManaged(true)
+    game.setVisible(true)
+    rootpane.setManaged(false)
+    rootpane.setVisible(false)
+    gameStart.setManaged(false)
+    gameStart.setVisible(false)
   }
 }
 
