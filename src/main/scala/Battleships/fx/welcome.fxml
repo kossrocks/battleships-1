@@ -278,5 +278,10 @@
             </GridPane>
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="blenderAnch" prefHeight="400.0" prefWidth="600.0" styleClass="pane-blender">
+         <children>
+            <Pane fx:id="blender" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
     </children>
 </AnchorPane>

@@ -1,11 +1,12 @@
 import javafx.event.ActionEvent
-import javafx.scene.layout.{AnchorPane, GridPane}
+import javafx.scene.layout.{AnchorPane, GridPane, Pane}
 import javafx.scene._
 import java.net.URL
 import java.util.ResourceBundle
 import javafx.fxml.{FXML, Initializable}
 import javafx.scene.control.{Button, Label, TextField}
 import javafx.scene.input.MouseEvent
+
 import Battleships.model.{Fleet, Player, Position}
 
 class welcomeFXController extends Initializable{
@@ -39,6 +40,10 @@ class welcomeFXController extends Initializable{
   @FXML private var player1_Grid : GridPane = _
   @FXML private var player2_Grid : GridPane = _
   @FXML private var turnLabel : Label = _
+
+  //Blender
+  @FXML private var blenderAnch : AnchorPane = _
+  @FXML private var blender : Pane = _
 
   //Save our setupinfoin these vars
   var battleField_Size : Int = _
@@ -76,6 +81,9 @@ class welcomeFXController extends Initializable{
     //game Starting
     gameStart.setVisible(false)
     gameStart.setManaged(false)
+    //Disable our Blenders
+    blenderAnch.setVisible(false) //SIND JZ DISABLED bind ma noch a funktion dran
+    blenderAnch.setManaged(false)
   }
 
   @FXML private def startSetup(event: ActionEvent): Unit = {
@@ -93,7 +101,9 @@ class welcomeFXController extends Initializable{
       battleShips.getText.toInt + cruisers.getText.toInt + submarines.getText.toInt == 0 ||
       player1Name.getText.isEmpty ||
       player2Name.getText.isEmpty ||
-      battleShips.getText.toInt * 5 + cruisers.getText.toInt * 3 + submarines.getText.toInt * 2 > 49)setupError.setText("Only Numbers above 0 are allowed! And fill all fields!")
+      battleShips.getText.toInt * 5 + cruisers.getText.toInt * 3 + submarines.getText.toInt * 2 > 49 ||
+      player1Name.getText.length > 10 ||
+      player2Name.getText.length > 10) setupError.setText("Only numbers above 0, names shorter than 10 chars and all fields filled!")
     else{
       //FETCH OUR SETTINGS
       battleShips_Amount = battleShips.getText.toInt
