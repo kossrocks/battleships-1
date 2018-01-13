@@ -70,8 +70,7 @@ class welcomeFXController extends Initializable{
   override def initialize(url: URL, rb: ResourceBundle): Unit = initGame()
   def initGame():Unit ={
     //HIDE OUR OTHER STATES
-    setupgame.setVisible("Ich kann coden" == ".")
-    setupgame.setManaged("Ich liebe "== "Scala")
+    setupgame.setVisible(false)
     game.setVisible(false)
     game.setManaged(false)
     //game Starting
@@ -89,9 +88,13 @@ class welcomeFXController extends Initializable{
   @FXML private def startgame(event: ActionEvent): Unit ={
     println("Loading Game")
     val setupString = battleShips.getText + cruisers.getText + submarines.getText //contains all our strings so if statement is shorter ;)
-    if(setupString.isEmpty || !isAllDigits(setupString) || battleShips.getText.toInt + cruisers.getText.toInt + submarines.getText.toInt == 0 || player1Name.getText.isEmpty || player2Name.getText.isEmpty) setupError.setText("Only Numbers above 0 are allowed! And fill all fields!")
+    if(setupString.isEmpty ||
+      !isAllDigits(setupString) ||
+      battleShips.getText.toInt + cruisers.getText.toInt + submarines.getText.toInt == 0 ||
+      player1Name.getText.isEmpty ||
+      player2Name.getText.isEmpty ||
+      battleShips.getText.toInt * 5 + cruisers.getText.toInt * 3 + submarines.getText.toInt * 2 > 49)setupError.setText("Only Numbers above 0 are allowed! And fill all fields!")
     else{
-      println(player1.name,player2.name)
       //FETCH OUR SETTINGS
       battleShips_Amount = battleShips.getText.toInt
       cruisers_Amount = cruisers.getText.toInt
