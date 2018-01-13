@@ -198,22 +198,7 @@ class welcomeFXController extends Initializable{
                 Ship = Ship ::: List(Position(i+1,y+1))
                 i = i - 1
               }
-              if(setupStatus == 1) {
-                if(hasSimiliarEntitites(Ship,player1_fleet.shipsPos)) println("Do steht schn a Schiff du Pferd")
-                else{
-                  Ship.foreach(coords => getNode(if(coords.x-1 == 0) null else coords.x-1, if(coords.y-1 == 0) null else coords.y-1 ,battleGrid).setStyle("-fx-background-color: #36403B"))
-                  player1_fleet.addShip(List(Ship)) //duplicate Code otherwhise ship will not be added watch how code gets executed!
-                  shipReduction() //afterwards is ESSENTIAL DO NOT TOUCH PLS
-                }
-              }
-              else if(setupStatus == 3) {
-                if (hasSimiliarEntitites(Ship, player2_fleet.shipsPos)) println("Do steht schn a Schiff du Pferd")
-                else {
-                  Ship.foreach(coords => getNode(if (coords.x - 1 == 0) null else coords.x - 1, if (coords.y - 1 == 0) null else coords.y - 1, battleGrid).setStyle("-fx-background-color: #36403B"))
-                  player1_fleet.addShip(List(Ship)) //duplicate Code otherwhise ship will not be added watch how code gets executed!
-                  shipReduction() //afterwards is ESSENTIAL DO NOT TOUCH PLS
-                }
-              }
+              shipPlacement(Ship)
             }
           }
           case 1 => {
@@ -225,22 +210,7 @@ class welcomeFXController extends Initializable{
                 Ship = Ship ::: List(Position(i + 1, y + 1))
                 i = i + 1
               }
-              if (setupStatus == 1) {
-                if (hasSimiliarEntitites(Ship, player1_fleet.shipsPos)) println("Do steht schn a Schiff du Pferd")
-                else {
-                  Ship.foreach(coords => getNode(if (coords.x - 1 == 0) null else coords.x - 1, if (coords.y - 1 == 0) null else coords.y - 1, battleGrid).setStyle("-fx-background-color: #36403B"))
-                  player1_fleet.addShip(List(Ship)) //duplicate Code otherwhise ship will not be added watch how code gets executed!
-                  shipReduction() //afterwards is ESSENTIAL DO NOT TOUCH PLS
-                }
-              }
-              else if (setupStatus == 3) {
-                if (hasSimiliarEntitites(Ship, player2_fleet.shipsPos)) println("Do steht schn a Schiff du Pferd")
-                else {
-                  Ship.foreach(coords => getNode(if (coords.x - 1 == 0) null else coords.x - 1, if (coords.y - 1 == 0) null else coords.y - 1, battleGrid).setStyle("-fx-background-color: #36403B"))
-                  player1_fleet.addShip(List(Ship)) //duplicate Code otherwhise ship will not be added watch how code gets executed!
-                  shipReduction() //afterwards is ESSENTIAL DO NOT TOUCH PLS
-                }
-              }
+              shipPlacement(Ship)
             }
           }
           case 2 => {
@@ -252,22 +222,7 @@ class welcomeFXController extends Initializable{
                 Ship = Ship ::: List(Position(x+1,i+1))
                 i = i - 1
               }
-              if(setupStatus == 1) {
-                if(hasSimiliarEntitites(Ship,player1_fleet.shipsPos)) println("Do steht schn a Schiff du Pferd")
-                else{
-                  Ship.foreach(coords => getNode(if(coords.x-1 == 0) null else coords.x-1, if(coords.y-1 == 0) null else coords.y-1 ,battleGrid).setStyle("-fx-background-color: #36403B"))
-                  player1_fleet.addShip(List(Ship)) //duplicate Code otherwhise ship will not be added watch how code gets executed!
-                  shipReduction() //afterwards is ESSENTIAL DO NOT TOUCH PLS
-                }
-              }
-              else if(setupStatus == 3) {
-                if (hasSimiliarEntitites(Ship, player2_fleet.shipsPos)) println("Do steht schn a Schiff du Pferd")
-                else {
-                  Ship.foreach(coords => getNode(if (coords.x - 1 == 0) null else coords.x - 1, if (coords.y - 1 == 0) null else coords.y - 1, battleGrid).setStyle("-fx-background-color: #36403B"))
-                  player1_fleet.addShip(List(Ship)) //duplicate Code otherwhise ship will not be added watch how code gets executed!
-                  shipReduction() //afterwards is ESSENTIAL DO NOT TOUCH PLS
-                }
-              }
+              shipPlacement(Ship)
             }
           }
           case 3 => {
@@ -279,28 +234,32 @@ class welcomeFXController extends Initializable{
                 Ship = Ship ::: List(Position(x+1,i+1))
                 i = i + 1
               }
-              if(setupStatus == 1) {
-                if(hasSimiliarEntitites(Ship,player1_fleet.shipsPos)) println("Do steht schn a Schiff du Pferd")
-                else{
-                  Ship.foreach(coords => getNode(if(coords.x-1 == 0) null else coords.x-1, if(coords.y-1 == 0) null else coords.y-1 ,battleGrid).setStyle("-fx-background-color: #36403B"))
-                  player1_fleet.addShip(List(Ship)) //duplicate Code otherwhise ship will not be added watch how code gets executed!
-                  shipReduction() //afterwards is ESSENTIAL DO NOT TOUCH PLS
-                }
-              }
-              else if(setupStatus == 3) {
-                if (hasSimiliarEntitites(Ship, player2_fleet.shipsPos)) println("Do steht schn a Schiff du Pferd")
-                else {
-                  Ship.foreach(coords => getNode(if (coords.x - 1 == 0) null else coords.x - 1, if (coords.y - 1 == 0) null else coords.y - 1, battleGrid).setStyle("-fx-background-color: #36403B"))
-                  player1_fleet.addShip(List(Ship)) //duplicate Code otherwhise ship will not be added watch how code gets executed!
-                  shipReduction() //afterwards is ESSENTIAL DO NOT TOUCH PLS
-                }
-              }
+              shipPlacement(Ship)
             }
           }
         }
       }
     }
     else println("Select a Ship first")
+  }
+
+  def shipPlacement(Ship:List[Position]):Unit={
+    if(setupStatus == 1) {
+      if(hasSimiliarEntitites(Ship,player1_fleet.shipsPos)) println("Do steht schn a Schiff du Pferd")
+      else{
+        Ship.foreach(coords => getNode(if(coords.x-1 == 0) null else coords.x-1, if(coords.y-1 == 0) null else coords.y-1 ,battleGrid).setStyle("-fx-background-color: #36403B"))
+        player1_fleet.addShip(List(Ship)) //duplicate Code otherwhise ship will not be added watch how code gets executed!
+        shipReduction() //afterwards is ESSENTIAL DO NOT TOUCH PLS
+      }
+    }
+    else if(setupStatus == 3) {
+      if (hasSimiliarEntitites(Ship, player2_fleet.shipsPos)) println("Do steht schn a Schiff du Pferd")
+      else {
+        Ship.foreach(coords => getNode(if (coords.x - 1 == 0) null else coords.x - 1, if (coords.y - 1 == 0) null else coords.y - 1, battleGrid).setStyle("-fx-background-color: #36403B"))
+        player1_fleet.addShip(List(Ship)) //duplicate Code otherwhise ship will not be added watch how code gets executed!
+        shipReduction() //afterwards is ESSENTIAL DO NOT TOUCH PLS
+      }
+    }
   }
 
   def shipPlaceCheck(): Boolean = {

@@ -10,12 +10,22 @@ def existIn (elem1 : Any, elem2 : List[Any]): Boolean = {
   }
 }
 
-def existInLoopale (elem1 : Position, elem2 : List[List[Position]]): Boolean = {
+def existInListList (elem1 : Position, elem2 : List[List[Position]]): Boolean = {
   elem2.length match{
     case 0 => false
     case otherwhise => {
       if(existIn(elem1,elem2.head)) true
-      else existInLoopale(elem1,elem2.tail)
+      else existInListList(elem1,elem2.tail)
+    }
+  }
+}
+
+def hasSimiliarEntitites (elem1 : List[Position],elem2 : List[List[Position]]) : Boolean = {
+  elem1.length match{
+    case 0 => false
+    case otherwhise => {
+      if(existInListList(elem1.head,elem2)) true
+      else hasSimiliarEntitites(elem1.tail,elem2)
     }
   }
 }
@@ -145,7 +155,7 @@ case class Player (id : Int, name : String) {
   }
 }
 //CLASSES END
-val shot = Position(3,3)
+val shot = List(Position(2,2),Position(3,3),Position(1,1))
 val list = List(List(Position(4,4),Position(1,2)),List(Position(3,3),Position(1,1)))
 
-existInLoopale(shot,list)
+hasSimiliarEntitites(shot,list)
