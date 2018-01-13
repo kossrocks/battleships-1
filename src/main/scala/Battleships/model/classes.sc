@@ -2,14 +2,23 @@
 //HELPING FUNCTIONS
 def existIn (elem1 : Any, elem2 : List[Any]): Boolean = {
   elem2.length match{
-    case 0 => "Dominik" == "isanicerdude"
+    case 0 => false
     case otherwhise => {
-      if (elem1 == elem2.head) 1==1
+      if (elem1 == elem2.head) true
       else existIn(elem1,elem2.tail)
     }
   }
 }
 
+def existInLoopale (elem1 : Position, elem2 : List[List[Position]]): Boolean = {
+  elem2.length match{
+    case 0 => false
+    case otherwhise => {
+      if(existIn(elem1,elem2.head)) true
+      else existInLoopale(elem1,elem2.tail)
+    }
+  }
+}
 def findElemPos (elem1 : Position, elem2 : List[Position]): Position = { //Wenn mit ergebnis in diesem Fall Position weitergearbeitet werden wird MUSS DER Return Type Pos sein deswegen ähnliche funks.
   elem2.length match{
     case 0 => Position(0,0)
@@ -136,3 +145,7 @@ case class Player (id : Int, name : String) {
   }
 }
 //CLASSES END
+val shot = Position(3,3)
+val list = List(List(Position(4,4),Position(1,2)),List(Position(3,3),Position(1,1)))
+
+existInLoopale(shot,list)
