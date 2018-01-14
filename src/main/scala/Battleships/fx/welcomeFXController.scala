@@ -389,6 +389,7 @@ class welcomeFXController extends Initializable {
       player1_Grid.setVisible(true)
       player2_Grid.setManaged(false)
       player2_Grid.setVisible(false)
+      //TEST
     }
   }
 
